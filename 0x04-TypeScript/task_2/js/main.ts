@@ -1,75 +1,66 @@
 // -----------------------------
-// Advanced types - Part 1
+// Task: Advanced Types
 // -----------------------------
 
-// 1️⃣ Director Interface
+// 1️⃣ DirectorInterface
 interface DirectorInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
   workDirectorTasks(): string;
 }
 
-// 2️⃣ Teacher Interface
+// 2️⃣ TeacherInterface
 interface TeacherInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
   workTeacherTasks(): string;
 }
 
-// 3️⃣ Director Class implementing DirectorInterface
+// 3️⃣ Director class implementing DirectorInterface
 class Director implements DirectorInterface {
   workFromHome(): string {
-    return 'Working from home';
+    return "Working from home";
   }
 
   getCoffeeBreak(): string {
-    return 'Getting a coffee break';
+    return "Getting a coffee break";
   }
 
   workDirectorTasks(): string {
-    return 'Getting to director tasks';
+    return "Getting to director tasks";
   }
 }
 
-// 4️⃣ Teacher Class implementing TeacherInterface
+// 4️⃣ Teacher class implementing TeacherInterface
 class Teacher implements TeacherInterface {
   workFromHome(): string {
-    return 'Cannot work from home';
+    return "Cannot work from home";
   }
 
   getCoffeeBreak(): string {
-    return 'Cannot have a break';
+    return "Cannot have a break";
   }
 
   workTeacherTasks(): string {
-    return 'Getting to work';
+    return "Getting to work";
   }
 }
 
 // 5️⃣ Function createEmployee
 function createEmployee(salary: number | string): Director | Teacher {
-  if (typeof salary === 'number' && salary < 500) {
+  if (typeof salary === "number" && salary < 500) {
     return new Teacher();
   } else {
     return new Director();
   }
 }
 
-// 6️⃣ Example test logs
-console.log(createEmployee(200).constructor.name);   // Teacher
-console.log(createEmployee(1000).constructor.name);  // Director
-console.log(createEmployee('$500').constructor.name); // Director
-
-// -----------------------------
-// Task 6: Creating functions specific to employees
-// -----------------------------
-
-// Type predicate to check if an employee is a Director
+// 6️⃣ Type predicate: isDirector
 function isDirector(employee: Director | Teacher): employee is Director {
   return employee instanceof Director;
 }
 
-// Function to execute work based on employee type
+// 7️⃣ Function executeWork
 function executeWork(employee: Director | Teacher): string {
   if (isDirector(employee)) {
     return employee.workDirectorTasks();
@@ -78,22 +69,35 @@ function executeWork(employee: Director | Teacher): string {
   }
 }
 
-// Example usage
-console.log(executeWork(createEmployee(200)));   // Getting to work
-console.log(executeWork(createEmployee(1000)));  // Getting to director tasks
+// -----------------------------
+// 8️⃣ Example test logs
+// -----------------------------
+console.log(createEmployee(200).constructor.name);    // Teacher
+console.log(createEmployee(1000).constructor.name);   // Director
+console.log(createEmployee("$500").constructor.name); // Director
+
+console.log(executeWork(createEmployee(200)));    // Getting to work
+console.log(executeWork(createEmployee(1000)));   // Getting to director tasks
+
 
 // -----------------------------
-// Task 7: String literal types
+// Task: String Literal Types
 // -----------------------------
 
-// String literal type for subjects
-type Subjects = 'Math' | 'History';
+// 1️⃣ String literal type Subjects
+type Subjects = "Math" | "History";
 
-// Function to teach a class
+// 2️⃣ Function teachClass
 function teachClass(todayClass: Subjects): string {
-  return `Teaching ${todayClass}`;
+  if (todayClass === "Math") {
+    return "Teaching Math";
+  } else {
+    return "Teaching History";
+  }
 }
 
+// -----------------------------
 // Example usage
-console.log(teachClass('Math'));    // Teaching Math
-console.log(teachClass('History')); // Teaching History
+// -----------------------------
+console.log(teachClass("Math"));    // Teaching Math
+console.log(teachClass("History")); // Teaching History
