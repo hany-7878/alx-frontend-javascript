@@ -11,10 +11,10 @@ const row: RowElement = {
   lastName: 'Salva',
 };
 
-// Insert the row
+// Insert the row and get new row ID
 const newRowID: RowID = CRUD.insertRow(row);
 
-// Update the row with age
+// Create updated row with age field
 const updatedRow: RowElement = {
   ...row,
   age: 23,
