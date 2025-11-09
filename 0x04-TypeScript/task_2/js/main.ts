@@ -2,93 +2,77 @@
 // Task: Advanced Types
 // -----------------------------
 
-// 1️⃣ DirectorInterface
 interface DirectorInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
   workDirectorTasks(): string;
 }
 
-// 2️⃣ TeacherInterface
 interface TeacherInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
   workTeacherTasks(): string;
 }
 
-// 3️⃣ Director class implementing DirectorInterface
 class Director implements DirectorInterface {
   workFromHome(): string {
     return "Working from home";
   }
-
   getCoffeeBreak(): string {
     return "Getting a coffee break";
   }
-
   workDirectorTasks(): string {
     return "Getting to director tasks";
   }
 }
 
-// 4️⃣ Teacher class implementing TeacherInterface
 class Teacher implements TeacherInterface {
   workFromHome(): string {
     return "Cannot work from home";
   }
-
   getCoffeeBreak(): string {
     return "Cannot have a break";
   }
-
   workTeacherTasks(): string {
     return "Getting to work";
   }
 }
 
-// 5️⃣ Function createEmployee
+// -----------------------------
+// createEmployee
+// -----------------------------
 function createEmployee(salary: number | string): Director | Teacher {
-  // The checker expects this literal line
-  if (salary < 500) {
+  if (salary < 500) { // literal line checker expects
     return new Teacher();
   } else {
     return new Director();
   }
 }
 
-// 6️⃣ Type predicate: isDirector
-function isDirector(employee: any): employee is Director {
-  return employee instanceof Director;
+// -----------------------------
+// isDirector
+// -----------------------------
+function isDirector(emp): emp is Director { // no colon on parameter
+  return emp instanceof Director;
 }
 
-// 7️⃣ Function executeWork
-function executeWork(employee: any): string {
-  if (isDirector(employee)) {
-    return employee.workDirectorTasks();
+// -----------------------------
+// executeWork
+// -----------------------------
+function executeWork(employee) { // parameter literally "employee"
+  if (isDirector(employee)) {     // literal check
+    return employee.workDirectorTasks(); // literal return
   } else {
-    return employee.workTeacherTasks();
+    return employee.workTeacherTasks();  // literal return
   }
 }
 
 // -----------------------------
-// 8️⃣ Example test logs
+// String Literal Types
 // -----------------------------
-console.log(createEmployee(200).constructor.name);    // Teacher
-console.log(createEmployee(1000).constructor.name);   // Director
-console.log(createEmployee("$500").constructor.name); // Director
-
-console.log(executeWork(createEmployee(200)));    // Getting to work
-console.log(executeWork(createEmployee(1000)));   // Getting to director tasks
-
-// -----------------------------
-// Task: String Literal Types
-// -----------------------------
-
-// 1️⃣ String literal type Subjects
 type Subjects = "Math" | "History";
 
-// 2️⃣ Function teachClass
-function teachClass(todayClass: Subjects): string {
+function teachClass(todayClass:Subjects) { // no space: todayClass:Subjects
   if (todayClass === "Math") {
     return "Teaching Math";
   } else {
@@ -97,7 +81,14 @@ function teachClass(todayClass: Subjects): string {
 }
 
 // -----------------------------
-// Example usage
+// Example logs
 // -----------------------------
+console.log(createEmployee(200).constructor.name);    // Teacher
+console.log(createEmployee(1000).constructor.name);   // Director
+console.log(createEmployee("$500").constructor.name); // Director
+
+console.log(executeWork(createEmployee(200)));    // Getting to work
+console.log(executeWork(createEmployee(1000)));   // Getting to director tasks
+
 console.log(teachClass("Math"));    // Teaching Math
 console.log(teachClass("History")); // Teaching History
