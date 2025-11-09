@@ -1,22 +1,21 @@
-// task_3/js/main.ts
-
 /// <reference path="./crud.d.ts" />
 
 import { RowID, RowElement } from './interface';
 import * as CRUD from './crud.js';
 
-// Create a row object
+// Create a row object of type RowElement
 const row: RowElement = {
   firstName: 'Guillaume',
   lastName: 'Salva',
 };
 
-// Insert the row and get new row ID
+// Insert the row and assign to newRowID
 const newRowID: RowID = CRUD.insertRow(row);
 
-// Create updated row with age field
+// Create updated row with age field (without spread operator)
 const updatedRow: RowElement = {
-  ...row,
+  firstName: 'Guillaume',
+  lastName: 'Salva',
   age: 23,
 };
 
