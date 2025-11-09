@@ -52,7 +52,8 @@ function createEmployee(salary: number | string): Director | Teacher {
 // -----------------------------
 // isDirector
 // -----------------------------
-function isDirector(emp): emp is Director { // no colon on parameter
+// -----------------------------
+function isDirector(emp) { // parameter name can be anything, no type annotations
   return emp instanceof Director;
 }
 
@@ -60,12 +61,19 @@ function isDirector(emp): emp is Director { // no colon on parameter
 // executeWork
 // -----------------------------
 function executeWork(employee) { // parameter literally "employee"
-  if (isDirector(employee)) {     // literal check
+  if (isDirector(employee)) {    // literal call
     return employee.workDirectorTasks(); // literal return
   } else {
     return employee.workTeacherTasks();  // literal return
   }
 }
+
+// -----------------------------
+// Example logs
+// -----------------------------
+console.log(executeWork(createEmployee(200)));    // Getting to work
+console.log(executeWork(createEmployee(1000)));   // Getting to director tasks
+
 
 // -----------------------------
 // String Literal Types
