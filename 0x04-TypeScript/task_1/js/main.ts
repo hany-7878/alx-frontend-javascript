@@ -27,10 +27,12 @@ console.log(teacher3);
 // Task 2: Directors Interface
 // -----------------------------
 
-// Interface Directors extending Teacher
+// Define the Directors interface that extends Teacher
+
 interface Directors extends Teacher {
-  numberOfReports: number; // Required attribute
+  numberOfReports: number;
 }
+
 
 // Example usage
 const director1: Directors = {
@@ -47,7 +49,7 @@ console.log(director1);
 // Task 3: printTeacher Function
 // -----------------------------
 
-// Define an interface for the function
+// Define the interface for the function
 interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
@@ -61,28 +63,31 @@ const printTeacher: printTeacherFunction = (firstName, lastName) => {
 console.log(printTeacher("John", "Doe")); // Output: J. Doe
 
 // -----------------------------
+// -----------------------------
 // Task 4: StudentClass
 // -----------------------------
 
-// Interface describing constructor
+// Interface describing the class constructor
 interface StudentConstructor {
   new (firstName: string, lastName: string): StudentClassInterface;
 }
 
-// Interface describing the class
+// Interface describing the structure of the class
 interface StudentClassInterface {
   workOnHomework(): string;
   displayName(): string;
 }
 
-// Implement the class
+// Implementing the StudentClass
 class StudentClass implements StudentClassInterface {
   constructor(public firstName: string, public lastName: string) {}
 
+  // Method that returns a fixed string
   workOnHomework(): string {
     return "Currently working";
   }
 
+  // Method that returns the student's first name
   displayName(): string {
     return this.firstName;
   }
@@ -90,5 +95,5 @@ class StudentClass implements StudentClassInterface {
 
 // Example usage
 const student1 = new StudentClass("Hana", "Tesfaye");
-console.log(student1.displayName()); // Hana
-console.log(student1.workOnHomework()); // Currently working
+console.log(student1.displayName());   // Output: Hana
+console.log(student1.workOnHomework()); // Output: Currently working
